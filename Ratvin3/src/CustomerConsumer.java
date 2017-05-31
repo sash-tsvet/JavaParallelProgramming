@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomerConsumer implements Runnable, Barber {
 
@@ -14,7 +15,7 @@ public class CustomerConsumer implements Runnable, Barber {
     public void doHairCut(Customer customer) {
         System.out.println("the barber: Working...");
         try {
-            Thread.sleep(random.nextInt(10000));
+            Thread.sleep(ThreadLocalRandom.current().nextInt(1, 10000));
         } catch (InterruptedException e) {
         }
 

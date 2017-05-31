@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomerProducer implements Runnable {
     private final Drop<Customer> drop;
@@ -27,7 +28,7 @@ public class CustomerProducer implements Runnable {
             }
 
             try {
-                Thread.sleep(random.nextInt(10000));
+                Thread.sleep(ThreadLocalRandom.current().nextInt(1, 10000));
             } catch (InterruptedException e) {
             }
         }

@@ -20,13 +20,19 @@ public class Server {
         return endByte;
     }
 
-    public synchronized void download (int startByte, int endByte) {
-        if ((startByte > this.startByte) || (endByte > this.endByte)) {
+    public synchronized void download (Task inTask) {
+        if ((inTask.getStartByte() < this.startByte) || (inTask.getEndByte() > this.endByte)) {
             System.out.println("Out of range error");
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return;
         }
         try {
-            Thread.sleep((endByte - startByte) * 100);
+            System.out.println("Downloading bytes " + inTask.getStartByte() + " to " + inTask.getEndByte());
+            Thread.sleep((inTask.getEndByte() - inTask.getStartByte()) * 100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
